@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Победа Онлайн PRO</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7fb;
+  color: #222;
+}
+.header {
+  background: linear-gradient(135deg,#2563eb,#1d4ed8);
+  color: white;
+  padding: 24px;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+.header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+.header p {
+  margin-top: 8px;
+  opacity: 0.9;
+}
+.container {
+  padding: 16px;
+}
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+.button {
+  display: block;
+  width: 100%;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  background: #2563eb;
+  color: white;
+  font-size: 16px;
+  margin-top: 12px;
+}
+.profile {
+  margin-top: 20px;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Победа Онлайн PRO</h1>
+  <p>Платформа скидок и партнёрских предложений</p>
+</div>
+
+<div class="container">
+
+  <div class="card">
+    <h3>☕ Кофейня Arabica</h3>
+    <p>Скидка 15% на все напитки</p>
+    <button class="button">Активировать скидку</button>
+  </div>
+
+  <div class="card">
+    <h3>🏨 Апартаменты у моря</h3>
+    <p>Спецпредложение для участников</p>
+    <button class="button">Посмотреть предложение</button>
+  </div>
+
+  <div class="card profile">
+    <h3>👤 Профиль</h3>
+    <p id="username">Гость</p>
+  </div>
+
+</div>
+
+<script>
+if (window.Telegram && Telegram.WebApp) {
+  Telegram.WebApp.expand();
+  document.getElementById("username").innerText =
+    Telegram.WebApp.initDataUnsafe.user?.first_name || "Пользователь";
+}
+</script>
+
+</body>
+</html>
