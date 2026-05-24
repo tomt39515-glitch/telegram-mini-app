@@ -3,342 +3,381 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
 <title>CityPass Азия</title>
-
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 <style>
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
 }
 
 body{
-background:#f5f7fb;
-color:#1d1d1f;
-padding-bottom:90px;
+  background:#f6f7fb;
+  color:#111827;
+  padding-bottom:90px;
 }
 
-.header{
-height:260px;
-background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80');
-background-size:cover;
-background-position:center;
-position:relative;
-padding:24px 20px;
+.hero{
+  height:230px;
+  background:
+    linear-gradient(rgba(0,0,0,0.28), rgba(0,0,0,0.28)),
+    url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80');
+  background-size:cover;
+  background-position:center;
+  border-bottom-left-radius:28px;
+  border-bottom-right-radius:28px;
+  padding:18px;
 }
 
-.overlay{
-position:absolute;
-inset:0;
-background:rgba(0,0,0,0.28);
+.topbar{
+  display:flex;
+  justify-content:flex-end;
 }
 
-.header-content{
-position:relative;
-z-index:2;
+.lang-btn{
+  background:rgba(255,255,255,0.95);
+  border:none;
+  padding:10px 14px;
+  border-radius:14px;
+  font-size:14px;
+  font-weight:600;
 }
 
 .logo{
-font-size:42px;
-font-weight:800;
-color:white;
-margin-top:20px;
+  margin-top:24px;
+  font-size:36px;
+  font-weight:800;
+  color:white;
 }
 
 .logo span{
-color:#ff7a00;
+  color:#ff7a00;
 }
 
 .subtitle{
-color:white;
-font-size:18px;
-margin-top:8px;
+  color:white;
+  margin-top:8px;
+  font-size:16px;
 }
 
 .search{
-margin-top:24px;
-background:white;
-border-radius:20px;
-padding:16px;
-font-size:16px;
-box-shadow:0 6px 18px rgba(0,0,0,0.1);
+  margin-top:18px;
+  background:white;
+  border-radius:18px;
+  padding:14px 16px;
+  font-size:16px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.12);
 }
 
 .categories{
-display:flex;
-gap:12px;
-overflow-x:auto;
-padding:18px 16px;
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  padding:14px;
 }
 
 .categories::-webkit-scrollbar{
-display:none;
+  display:none;
 }
 
 .category{
-min-width:90px;
-background:white;
-border-radius:20px;
-padding:12px;
-text-align:center;
-box-shadow:0 4px 14px rgba(0,0,0,0.08);
-cursor:pointer;
+  min-width:84px;
+  background:white;
+  border-radius:18px;
+  padding:12px 8px;
+  text-align:center;
+  box-shadow:0 4px 14px rgba(0,0,0,0.08);
 }
 
 .category-icon{
-font-size:34px;
+  font-size:28px;
 }
 
 .category-name{
-margin-top:8px;
-font-size:14px;
-font-weight:600;
-}
-
-.section{
-padding:0 16px;
-margin-top:10px;
+  margin-top:8px;
+  font-size:12px;
+  font-weight:700;
+}.section{
+  padding:0 14px;
 }
 
 .section-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:8px 0 14px;
 }
 
 .section-title{
-font-size:24px;
-font-weight:800;
+  font-size:28px;
+  font-weight:800;
 }
 
-.link{
-color:#007aff;
-font-weight:600;
-cursor:pointer;
+.section-link{
+  color:#007aff;
+  font-weight:700;
+  font-size:16px;
 }
 
 .cards{
-display:flex;
-gap:14px;
-overflow-x:auto;
-padding-bottom:10px;
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  padding-bottom:10px;
 }
 
 .cards::-webkit-scrollbar{
-display:none;
+  display:none;
 }
 
 .card{
-min-width:260px;
-background:white;
-border-radius:22px;
-overflow:hidden;
-box-shadow:0 6px 20px rgba(0,0,0,0.08);
+  min-width:230px;
+  background:white;
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 8px 22px rgba(0,0,0,0.08);
 }
 
 .card img{
-width:100%;
-height:170px;
-object-fit:cover;
+  width:100%;
+  height:150px;
+  object-fit:cover;
 }
 
 .card-body{
-padding:14px;
+  padding:14px;
 }
 
 .card-title{
-font-size:20px;
-font-weight:700;
+  font-size:22px;
+  font-weight:800;
 }
 
-.location{
-font-size:14px;
-color:#777;
-margin-top:6px;
+.card-location{
+  margin-top:8px;
+  color:#6b7280;
+  font-size:14px;
 }
 
-.price{
-margin-top:10px;
-font-size:22px;
-font-weight:800;
-color:#ff7a00;
+.card-price{
+  margin-top:10px;
+  color:#ff7a00;
+  font-size:18px;
+  font-weight:800;
 }
 
-.btn{
-margin-top:12px;
-width:100%;
-border:none;
-background:#ff7a00;
-color:white;
-padding:14px;
-border-radius:14px;
-font-size:16px;
-font-weight:700;
-cursor:pointer;
+.card-btn{
+  margin-top:14px;
+  width:100%;
+  border:none;
+  background:#ff7a00;
+  color:white;
+  padding:14px;
+  border-radius:14px;
+  font-size:16px;
+  font-weight:700;
 }
 
 .banner{
-margin:20px 16px;
-background:linear-gradient(90deg,#fff3d8,#ffe0b0);
-border-radius:22px;
-padding:20px;
-font-size:24px;
-font-weight:800;
-color:#222;
+  margin:20px 14px;
+  background:linear-gradient(90deg,#fff5dc,#ffe3b8);
+  border-radius:22px;
+  padding:20px;
+  font-size:28px;
+  font-weight:800;
+  line-height:1.2;
 }
 
 .banner span{
-color:#ff7a00;
+  color:#ff7a00;
 }
 
 .bottom-nav{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-background:white;
-display:flex;
-justify-content:space-around;
-padding:14px 0;
-box-shadow:0 -4px 20px rgba(0,0,0,0.08);
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  background:white;
+  display:flex;
+  justify-content:space-around;
+  padding:12px 0 16px;
+  box-shadow:0 -6px 20px rgba(0,0,0,0.08);
 }
 
 .nav-item{
-text-align:center;
-font-size:12px;
-cursor:pointer;
+  text-align:center;
+  font-size:12px;
+  color:#111827;
 }
 
 .nav-icon{
-font-size:24px;
-margin-bottom:6px;
+  font-size:22px;
+  margin-bottom:6px;
 }
 </style>
 </head>
+
 <body>
 
-<div class="header">
-<div class="overlay"></div>
-<div class="header-content">
-<div class="logo">City<span>Pass</span> Азия</div>
-<div class="subtitle">Ваш помощник в путешествии</div>
-<div class="search">🔍 Что ищете?</div>
-</div>
+<div class="hero">
+  <div class="topbar">
+    <button class="lang-btn">RU</button>
+  </div>
+
+  <div class="logo">
+    City<span>Pass</span> Азия
+  </div>
+
+  <div class="subtitle">
+    Ваш помощник в путешествии
+  </div>
+
+  <div class="search">
+    🔍 Что ищете?
+  </div>
 </div>
 
 <div class="categories">
-<div class="category" onclick="showAlert('Байки')">
-<div class="category-icon">🛵</div>
-<div class="category-name">Байки</div>
-</div>
+  <div class="category">
+    <div class="category-icon">🛵</div>
+    <div class="category-name">Байки</div>
+  </div>
 
-<div class="category" onclick="showAlert('Авто')">
-<div class="category-icon">🚗</div>
-<div class="category-name">Авто</div>
-</div>
+  <div class="category">
+    <div class="category-icon">🚗</div>
+    <div class="category-name">Авто</div>
+  </div>
 
-<div class="category" onclick="showAlert('Экскурсии')">
-<div class="category-icon">🏝️</div>
-<div class="category-name">Экскурсии</div>
-</div>
+  <div class="category">
+    <div class="category-icon">🏝️</div>
+    <div class="category-name">Экскурсии</div>
+  </div>
 
-<div class="category" onclick="showAlert('Жильё')">
-<div class="category-icon">🏨</div>
-<div class="category-name">Жильё</div>
-</div>
+  <div class="category">
+    <div class="category-icon">🏨</div>
+    <div class="category-name">Жильё</div>
+  </div>
 
-<div class="category" onclick="showAlert('Еда')">
-<div class="category-icon">🍽️</div>
-<div class="category-name">Еда</div>
-</div>
+  <div class="category">
+    <div class="category-icon">🍽️</div>
+    <div class="category-name">Еда</div>
+  </div>
 
-<div class="category" onclick="showAlert('Трансфер')">
-<div class="category-icon">🚐</div>
-<div class="category-name">Трансфер</div>
-</div>
+  <div class="category">
+    <div class="category-icon">🚐</div>
+    <div class="category-name">Трансфер</div>
+  </div>
 
-<div class="category" onclick="showAlert('Обмен валют')">
-<div class="category-icon">💵</div>
-<div class="category-name">Обмен</div>
-</div>
-</div>
+  <div class="category">
+    <div class="category-icon">💱</div>
+    <div class="category-name">Обмен</div>
+  </div>
+</div><div class="section">
+  <div class="section-header">
+    <div class="section-title">Популярное</div>
+    <div class="section-link">Смотреть все</div>
+  </div>
 
-<div class="section">
-<div class="section-header">
-<div class="section-title">Популярное</div>
-<div class="link">Смотреть все</div>
-</div>
+  <div class="cards">
 
-<div class="cards">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=900&q=80">
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800&q=80">
-<div class="card-body">
-<div class="card-title">Honda Air Blade</div>
-<div class="location">📍 Нячанг</div>
-<div class="price">150 000 VND / день</div>
-<button class="btn" onclick="showAlert('Байк')">Забронировать</button>
-</div>
-</div>
+      <div class="card-body">
+        <div class="card-title">Honda Air Blade</div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80">
-<div class="card-body">
-<div class="card-title">Island Tour</div>
-<div class="location">📍 Нячанг</div>
-<div class="price">650 000 VND</div>
-<button class="btn" onclick="showAlert('Экскурсия')">Подробнее</button>
-</div>
-</div>
+        <div class="card-location">
+          📍 Нячанг
+        </div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80">
-<div class="card-body">
-<div class="card-title">Scenia Apartment</div>
-<div class="location">📍 Нячанг</div>
-<div class="price">$35 / ночь</div>
-<button class="btn" onclick="showAlert('Жильё')">Забронировать</button>
-</div>
-</div>
+        <div class="card-price">
+          150 000 VND / день
+        </div>
 
-</div>
+        <button class="card-btn" onclick="showAlert('Байки')">
+          Забронировать
+        </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=900&q=80">
+
+      <div class="card-body">
+        <div class="card-title">Island Tour</div>
+
+        <div class="card-location">
+          📍 Нячанг
+        </div>
+
+        <div class="card-price">
+          650 000 VND / чел
+        </div>
+
+        <button class="card-btn" onclick="showAlert('Экскурсии')">
+          Подробнее
+        </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80">
+
+      <div class="card-body">
+        <div class="card-title">Scenia Apartment</div>
+
+        <div class="card-location">
+          📍 Нячанг
+        </div>
+
+        <div class="card-price">
+          $35 / ночь
+        </div>
+
+        <button class="card-btn" onclick="showAlert('Жильё')">
+          Забронировать
+        </button>
+      </div>
+    </div>
+
+  </div>
 </div>
 
 <div class="banner">
-Скидки до <span>50%</span><br>
-по карте CityPass
+  Скидки до <span>50%</span><br>
+  по карте CityPass
 </div>
 
 <div class="bottom-nav">
-<div class="nav-item" onclick="showAlert('Главная')">
-<div class="nav-icon">🏠</div>
-Главная
-</div>
 
-<div class="nav-item" onclick="showAlert('Избранное')">
-<div class="nav-icon">❤️</div>
-Избранное
-</div>
+  <div class="nav-item" onclick="showAlert('Главная')">
+    <div class="nav-icon">🏠</div>
+    Главная
+  </div>
 
-<div class="nav-item" onclick="showAlert('Брони')">
-<div class="nav-icon">📅</div>
-Брони
-</div>
+  <div class="nav-item" onclick="showAlert('Избранное')">
+    <div class="nav-icon">❤️</div>
+    Избранное
+  </div>
 
-<div class="nav-item" onclick="showAlert('Скидки')">
-<div class="nav-icon">🎁</div>
-Скидки
-</div>
+  <div class="nav-item" onclick="showAlert('Брони')">
+    <div class="nav-icon">📅</div>
+    Брони
+  </div>
 
-<div class="nav-item" onclick="showAlert('Профиль')">
-<div class="nav-icon">👤</div>
-Профиль
-</div>
+  <div class="nav-item" onclick="showAlert('Скидки')">
+    <div class="nav-icon">🎁</div>
+    Скидки
+  </div>
+
+  <div class="nav-item" onclick="showAlert('Профиль')">
+    <div class="nav-icon">👤</div>
+    Профиль
+  </div>
+
 </div>
 
 <script>
@@ -346,7 +385,7 @@ const tg = window.Telegram.WebApp;
 tg.expand();
 
 function showAlert(name){
-tg.showAlert(name + ' — раздел в разработке');
+  tg.showAlert(name + " — раздел в разработке");
 }
 </script>
 
