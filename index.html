@@ -380,14 +380,55 @@ body{
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
 const tg = window.Telegram.WebApp;
 tg.expand();
 
-function showAlert(name){
-  tg.showAlert(name + " — раздел в разработке");
-}
-</script>
+const SUPABASE_URL = 'https://doswzyuumcwxjmltcgeh.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_5_sw0Rk7sPg-SMTgI1aTkA_Vb5QAZRP';
 
-</body>
-</html>
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+function showAlert(name){
+  tg.showAlert(name + ' — раздел в разработке');
+}
+
+async function loadOffers() {
+  const { data, error } = await supabaseClient
+    .from('offers')
+    .select('*')
+    .eq('is_active', true)
+    .limit(10);
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  const cardsContainer = document.querySelector('.cards');
+
+  if (!cardsContainer) return;
+
+  cardsContainer.innerHTML = '';
+
+  data.forEach(offer => {
+    cardsContainer.innerHTML += `
+      <div class="card">
+        <img src="${offer.image_url}" alt="${offer.title}">
+        <div class="card-body">
+          <div class="card-title">${offer.title}</div>
+          <div class="card-location">📍 ${offer.location}</div>
+          <div class="card-price">${offer.price}</div>
+          <button class="card-btn" onclick="showAlert('${offer.title}')">
+            Подробнее
+          </button>
+        </div>
+      </div>
+    `;
+  });
+}
+
+loadOffers();
+</script>
